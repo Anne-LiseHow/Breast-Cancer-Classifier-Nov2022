@@ -32,11 +32,15 @@ Normalising the dataset facilitates the comparison of the classifiers built.
 ### Number of Benign and Malignant Cases
 Out of the 683 observations, we have 444 benign cases, which account for 65% of the total observations. The malignant cases make up the remaining 35% of the total data set, which is equivalent to 239 observations.
 
+![Bar Chart Showing Number of Benign and Malignant Cases](Images/BarChart_Class.png)
+
 ### Relationship between predictor variables
 From the scatterplot matrix, it is observed that there is a strong positive correlation (0.907) between the predictor variables Cell Size and Cell Shape. In fact, Cell Size has relatively strong correlation with all the predictor variables except for Mitoses variable. Similarly, the same scenario occurs for Cell Shape variable. On the other hand, Mitoses has lower correlation with all the predictor variables.
 
 ### Relationship between predictor and response variables
 In the last column, the boxplots show that that there is a difference in the range of values for benign and malignant cases. Benign tumour cells tend to have lower values for all the nine variables while the malignant tumour cells are more likely to have higher values. The only exception is for Mitoses variable, whose values are in the same range for benign and malignant cells; we could expect the Mitoses variable to have less influence on the response variable. For the benign cases, we can observe some outliers in the data for most of the predictor variables, and this could lead to prediction errors in the classification.
+
+![Scatterplot showing correlation among variables](Images/Scatterplot_1.png)
 
 ## Classifiers
 We want to build a classifier to predict the diagnosis of the breast tissue, i.e., whether it is malignant or benign, using a subset or all of the nine characteristics. Our predictor variable is Class which is a factor with two levels: benign or malignant. The data has been normalised before modelling to facilitate the comparison of the three different classifiers, namely:
@@ -48,18 +52,7 @@ We want to build a classifier to predict the diagnosis of the breast tissue, i.e
 **Best Subset Selection**  
 We will select the “best” model by comparing the Akaike information criterion (AIC) and Bayes Information Criterion (BIC) of each model. Minimum value of both information criterion usually indicates better predictive model. The table below provides both values AIC and BIC for each model. Model with 7 predictors achieved lowest AIC while 5 predictors achieved lowest BIC.
 
-|Model|AIC|BIC|
-|-----|---|---|
-|0|884.3502|884.3502|
-|1|256.7596|261.2861|
-|2|170.3120|179.3649|
-|3|141.5556|155.1351|
-|4|130.7431|148.8491|
-|5|122.2635|144.8960|
-|6|119.1437|146.3027|
-|7|117.2668|148.9522|
-|8|118.8891|155.1011|
-|9|120.8882|161.6266|
+![AIC vs BIC](Images/AIC_BIC.png)
 
 From Figure 4.1, we choose M<sub>6</sub> to be the selected model, since its AIC and BIC are both relatively low, and have little difference with the information criterion values of both  M<sub>5</sub> and M<sub>7</sub>. The three variables which have been dropped out from the model are Cell Size, Single Epithelial Cell Size, and Mitoses. As expected, Cell size has been excluded since it is highly correlated with Cell shape, which is included in the model. As a result, the model would only need one of the two variables. From Figure 3.2, the values for the variable Mitoses are in the same range for both classes, making it difficult to distinguish between the two based on the value of variable Mitoses, which explains why Mitoses has been dropped out.
 
@@ -84,6 +77,8 @@ The test error, 0.049, of the model shows that approximately 95% of predictions 
 
 ### LASSO Regression
 In the LASSO regression, the same training and testing data set as in logistic regression were used, which will facilitate comparison of models. Firstly, a LASSO regression has been performed using the whole data for a range of values of λ, the tuning parameter. From Figure 4.3, as λ increases, Cell Size is the first variable to be dropped out, followed by Mitoses, Marginal Adhesion, and so on.  
+
+![Effect of Lambda](Images/Loglambda.png)
 
 Figure 4.3: Effect of lambda on the data
 
