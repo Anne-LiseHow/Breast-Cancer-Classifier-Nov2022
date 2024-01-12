@@ -50,14 +50,14 @@ We want to build a classifier to predict the diagnosis of the breast tissue, i.e
 
 ### Logistic Regression with Best Subset Selection
 **Best Subset Selection**  
-We will select the “best” model by comparing the Akaike information criterion (AIC) and Bayes Information Criterion (BIC) of each model. Minimum value of both information criterion usually indicates better predictive model. The table below provides both values AIC and BIC for each model. Model with 7 predictors achieved lowest AIC while 5 predictors achieved lowest BIC.
+We will select the “best” model by comparing the Akaike information criterion (AIC) and Bayes Information Criterion (BIC) of each model. Minimum value of both information criterion usually indicates better predictive model. The table below provides both values AIC and BIC for each model. Model with 7 predictors achieved the lowest AIC while 5 predictors achieved the lowest BIC.
 
 ![AIC vs BIC](Images/AIC_BIC.png)
 
-From Figure 4.1, we choose M<sub>6</sub> to be the selected model, since its AIC and BIC are both relatively low, and have little difference with the information criterion values of both  M<sub>5</sub> and M<sub>7</sub>. The three variables which have been dropped out from the model are Cell Size, Single Epithelial Cell Size, and Mitoses. As expected, Cell size has been excluded since it is highly correlated with Cell shape, which is included in the model. As a result, the model would only need one of the two variables. From Figure 3.2, the values for the variable Mitoses are in the same range for both classes, making it difficult to distinguish between the two based on the value of variable Mitoses, which explains why Mitoses has been dropped out.
+We choose M<sub>6</sub> to be the selected model, since its AIC and BIC are both relatively low, as observed from the figure above, and have little difference with the information criterion values of both  M<sub>5</sub> and M<sub>7</sub>. The three variables which have been dropped out from the model are Cell Size, Single Epithelial Cell Size, and Mitoses. As expected, Cell size has been excluded since it is highly correlated with Cell shape, which is included in the model. As a result, the model would only need one of the two variables. From the correlation matrix, the values for the variable Mitoses are in the same range for both classes, making it difficult to distinguish between the two based on the value of variable Mitoses, which explains why Mitoses has been dropped out.
 
 **Logistic Regression**  
-We will now perform the logistic regression with the six variables found in M<sub>6</sub>, namely: Clump Thickness, Cell Shape, Marginal Adhesion, Bare Nuclei, Bland Chromatin, and Normal Nucleoli. The data set has been split randomly into a 70% training data and a 30% testing data. Logistic regression was fit using the training data only, and the testing data was used for testing purposes of the predictive performance of the model.
+Logistic Regression was conducted with the six variables found in M<sub>6</sub>, namely: Clump Thickness, Cell Shape, Marginal Adhesion, Bare Nuclei, Bland Chromatin, and Normal Nucleoli. The data set has been split randomly into a 70% training data and a 30% testing data.
 
 |Variable	(Intercept)|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
 |--------------------|---------------|----------|-----------------|-----------|---------------|---------------|
@@ -72,15 +72,12 @@ The parameter estimates show that Clump Thickness, Cell Shape, Bare Nuclei and B
 |**0**|130|3|
 |**1**|7|63|
 
-Matrix 4.1: Confusion Matrix for Logistic Regression
 The test error, 0.049, of the model shows that approximately 95% of predictions are accurate. From the confusion matrix, we can deduce that 7 malignant observations were classified as benign, while 3 benign diagnosis were classified as malignant.
 
 ### LASSO Regression
-In the LASSO regression, the same training and testing data set as in logistic regression were used, which will facilitate comparison of models. Firstly, a LASSO regression has been performed using the whole data for a range of values of λ, the tuning parameter. From Figure 4.3, as λ increases, Cell Size is the first variable to be dropped out, followed by Mitoses, Marginal Adhesion, and so on.  
+In the LASSO regression, the same training and testing data set as in logistic regression were used, which will facilitate comparison of models. Firstly, a LASSO regression has been performed using the whole data for a range of values of λ, the tuning parameter. From the figure below, as λ increases, Cell Size is the first variable to be dropped out, followed by Mitoses, Marginal Adhesion, and so on.  
 
 ![Effect of Lambda](Images/Loglambda.png)
-
-Figure 4.3: Effect of lambda on the data
 
 To find out the optimal value of λ, a 10-fold cross-validation was used to fit the LASSO regression with different values of λ. The value of λ which minimises mean square error is 0.01. A LASSO regression was fitted using this specific value and the training data, and the model was then used to predict the test data.
 
@@ -99,8 +96,6 @@ As per the parameter estimates, the LASSO regression consists of eight variables
 |x_8|Normal Nucleoli|0.51511|
 |x_9|Mitoses|0.15087|
 
-Table 4.3: Parameter Estimates obtained from LASSO Regression 
-
 The test error is 0.059, showing that the model is around 94% accurate in its prediction. From the confusion matrix, 4 benign cases were wrongly classified as malignant, and 8 malignant cases were wrongly classified as benign.
 || Predicted||
 |--------|----------|-|
@@ -108,16 +103,13 @@ The test error is 0.059, showing that the model is around 94% accurate in its pr
 |**0**|129|	4|
 |**1**|	8	|62|
 
-Matrix 4.2: Confusion Matrix for LASSO Regression
-
 
 ### Bayes Classifier for Linear Discriminant Analysis (LDA) 
 The Bayes Classifier for LDA is built using the Best Subset Selection i.e., M<sub>6</sub>: Clump Thickness, Cell Shape, Marginal Adhesion, Bare Nuclei, Bland Chromatin, and Normal Nucleoli. 
 
 **Results of LDA**  
 The prior probabilities and means of the groups (0 being benign and 1 being malignant) are given by:
-Table 4.4: Prior Probabilities and Means of groups obtained from LDA
-Class	Prior Probabilities	Group Means
+
 |Class|Prior Probabilities|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
 |-----|-------------------|---------------|----------|-----------------|-----------|---------------|---------------|
 |0|0.64792|-0.50671|-0.60136|-0.53451|-0.60657|-0.56759|-0.53664|
@@ -125,10 +117,8 @@ Class	Prior Probabilities	Group Means
 
 Since the probability of a malignant case in the population is unknown, we cannot specify the prior probabilities. The ones chosen by the LDA function are an indication of the proportion of benign and malignant cases in the data set.
 
-Table 4.5 shows the group means in their original scale. We can see a clearly difference between the means of benign and malignant tumours. For benign cases, the means are on the lower side (from a minimum of 1 to a maximum of 3) whereas for malignant cases, the means are much higher, ranging from 5 to nearly 8).
+Looking at the group means in original scaling, we can see a clearly difference between the means of benign and malignant tumours. For benign cases, the means are on the lower side (from a minimum of 1 to a maximum of 3) whereas for malignant cases, the means are much higher, ranging from 5 to nearly 8).
 
-Table 4.5: Group Means in Original Scaling
-Class	Group Means
 |Class|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
 |-----|---------------|----------|-----------------|-----------|---------------|---------------|
 |0|3.012862|1.107521|2.135718|2.731181|1.204253|2.130491|
@@ -141,19 +131,16 @@ The test error obtained is 0.074, and consequently, we can say that the model is
 |**0**|	130	|3|
 |**1**|	12|	58|
 
-
-Matrix 4.3: Confusion Matrix for LDA
   
 ## Comparison of the classifiers
 From the results above, the classifier with better predictive performance is the Logistic Regression with Best Subset Selection (test error = 0.049),  followed by LASSO Regression (test error = 0.059) and then, Bayes classifier for LDA (test error = 0.074). However, the test results are based on a single train set and test set. For better comparison, we will apply a 10-fold cross validation to compute an average test error for each classifier, which will be used to compare the predictive performances. For the comparison to be fair, we will use the same 10 partitioning for the three methods, and the model M<sub>6</sub>, for Logistic Regression and Bayes Classifier for LDA.
 
-Table 5.1: Average MSE obtained from 10-fold Cross-validation
 |Classifier|Test Error (MSE)|Accuracy (%)|
 |----------|----------------|------------|
 |Logistic| Regression|	0.0380|	96.2|
 |LASSO Regression|	0.0223	|97.8|
 |Bayes Classifier for LDA|	0.0395	|96.1|
 
-Since we have used the 10-fold cross validation on the test error, we notice that the test errors have decreased in value for all three classifiers, as shown in Table 5.1. The LASSO Regression achieved better predictive performance with 97.8% accuracy, followed by Logistic Regression and Bayes Classifier for LDA. These two remaining classifiers have approximately same accuracy in predictions. Nonetheless, the Logistic Regression with Best Subset Selection and Bayes Classifier for LDA have both 96% accuracy in their predictions using only 6 predictor variables, while the LASSO regression achieved a higher accuracy using 8 predictor variables.
+Since we have used the 10-fold cross validation on the test error, we notice that the test errors have decreased in value for all three classifiers. The LASSO Regression achieved better predictive performance with 97.8% accuracy, followed by Logistic Regression and Bayes Classifier for LDA. These two remaining classifiers have approximately same accuracy in predictions. Nonetheless, the Logistic Regression with Best Subset Selection and Bayes Classifier for LDA have both 96% accuracy in their predictions using only 6 predictor variables, while the LASSO regression achieved a higher accuracy using 8 predictor variables.
 
 The “best” classifier based on the test error will be the LASSO Regression. However, if we are to consider the number of predictor variables used, we can say that the “best” classifier would be the Logistic Regression with the Best Subset Selection. The latter achieved nearly the same accuracy with 6 variables instead of 8, as in the LASSO Regression. Additionally, having less predictor variables usually reduces the variance in the parameter estimates, and consequently leads to a better predictive performance.
