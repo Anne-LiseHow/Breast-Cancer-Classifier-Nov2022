@@ -60,14 +60,14 @@ We choose M<sub>6</sub> to be the selected model, since its AIC and BIC are both
 Logistic Regression was conducted with the six variables found in M<sub>6</sub>, namely: Clump Thickness, Cell Shape, Marginal Adhesion, Bare Nuclei, Bland Chromatin, and Normal Nucleoli. The data set has been split randomly into a 70% training data and a 30% testing data.
 
 |Variable	(Intercept)|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
-|--------------------|---------------|----------|-----------------|-----------|---------------|---------------|
+|:-------------------|--------------:|---------:|----------------:|----------:|--------------:|--------------:|
 |Estimate|-1.6285|1.8045|1.0699|0.4567|1.5987|1.5371|0.7621|
 |P-value|0.000223|0.000720|0.070199|0.330784|0.000412|0.010035|0.053373|
 
 The parameter estimates show that Clump Thickness, Cell Shape, Bare Nuclei and Bland Chromatin are the variables having the most influence on the response variable Y, i.e., the diagnosis. In addition, the parameters estimates are all positive, indicating that the probability of Y assigned to 1 increases as the value of the variables increases. On the other hand, the p-value of Marginal Adhesion is quite high which means that same could have been removed from the model. This can also be seen from its parameter estimate value of 0.4567 which is lowest among the predictor variables, showing that it has the least influence.
 
 || Predicted||
-|--------|----------|-|
+|:-------|---------:|-:|
 |**Observed**|**0**|**1**|
 |**0**|130|3|
 |**1**|7|63|
@@ -83,8 +83,8 @@ To find out the optimal value of λ, a 10-fold cross-validation was used to fit 
 
 As per the parameter estimates, the LASSO regression consists of eight variables as Cell Size has been dropped out. As shown in correlation matrix, Cell Size is strongly positively correlated with Cell Shape, and hence, the model does not require both of the variables. The parameter estimates are positive for all predictor variables, showing that the probability of classifying the observation as malignant increases with higher values of the predictor variables.
 
-| |Variables|Estimate|
-|-|---------|--------|
+|  |Variables|Estimate|
+|:-|:--------|-------:|
 ||(Intercept)|- 1.26299|
 |x<sub>1</sub>|Clump Thickness|1.03032|
 |x<sub>2</sub>|Cell Size|0.00000|
@@ -98,7 +98,7 @@ As per the parameter estimates, the LASSO regression consists of eight variables
 
 The test error is 0.059, showing that the model is around 94% accurate in its prediction. From the confusion matrix, 4 benign cases were wrongly classified as malignant, and 8 malignant cases were wrongly classified as benign.
 || Predicted||
-|--------|----------|-|
+|:-------|---------:|-:|
 |**Observed**|**0**|**1**|
 |**0**|129|	4|
 |**1**|	8	|62|
@@ -111,7 +111,7 @@ The Bayes Classifier for LDA is built using the Best Subset Selection i.e., M<su
 The prior probabilities and means of the groups (0 being benign and 1 being malignant) are given by:
 
 |Class|Prior Probabilities|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
-|-----|-------------------|---------------|----------|-----------------|-----------|---------------|---------------|
+|:----|------------------:|--------------:|---------:|----------------:|----------:|--------------:|--------------:|
 |0|0.64792|-0.50671|-0.60136|-0.53451|-0.60657|-0.56759|-0.53664|
 |1|0.35208|0.97601|1.15950|0.97437|1.19509|1.05502|1.05645|
 
@@ -120,13 +120,13 @@ Since the probability of a malignant case in the population is unknown, we canno
 Looking at the group means in original scaling, we can see a clearly difference between the means of benign and malignant tumours. For benign cases, the means are on the lower side (from a minimum of 1 to a maximum of 3) whereas for malignant cases, the means are much higher, ranging from 5 to nearly 8).
 
 |Class|Clump Thickness|Cell Shape|Marginal Adhesion|Bare Nuclei|Bland Chromatin|Normal Nucleoli|
-|-----|---------------|----------|-----------------|-----------|---------------|---------------|
+|:----|--------------:|---------:|----------------:|----------:|--------------:|--------------:|
 |0|3.012862|1.107521|2.135718|2.731181|1.204253|2.130491|
 |1|6.132120|7.769692|5.844116|6.786862|7.389016|6.094675|
 
 The test error obtained is 0.074, and consequently, we can say that the model is around 93% accurate in the classification. From the confusion matrix, 3 observations have been wrongly classified as malignant and 12 observations wrongly classified as benign.
 || Predicted||
-|--------|----------|-|
+|:-------|---------:|-:|
 |**Observed**|**0**|**1**|
 |**0**|	130	|3|
 |**1**|	12|	58|
@@ -136,7 +136,7 @@ The test error obtained is 0.074, and consequently, we can say that the model is
 From the results above, the classifier with better predictive performance is the Logistic Regression with Best Subset Selection (test error = 0.049),  followed by LASSO Regression (test error = 0.059) and then, Bayes classifier for LDA (test error = 0.074). However, the test results are based on a single train set and test set. For better comparison, we will apply a 10-fold cross validation to compute an average test error for each classifier, which will be used to compare the predictive performances. For the comparison to be fair, we will use the same 10 partitioning for the three methods, the model M<sub>6</sub>, for Logistic Regression and Bayes Classifier for LDA, and M<sub>8</sub> for LASSO Regression.
 
 |Classifier|Test Error (MSE)|Accuracy (%)|
-|----------|----------------|------------|
+:---------|---------------:|-----------:|
 |Logistic Regression|	0.0380|	96.2|
 |LASSO Regression|	0.0223	|97.8|
 |Bayes Classifier for LDA|	0.0395	|96.1|
