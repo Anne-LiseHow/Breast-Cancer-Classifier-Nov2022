@@ -81,20 +81,20 @@ In the LASSO regression, the same training and testing data set as in logistic r
 
 To find out the optimal value of λ, a 10-fold cross-validation was used to fit the LASSO regression with different values of λ. The value of λ which minimises mean square error is 0.01. A LASSO regression was fitted using this specific value and the training data, and the model was then used to predict the test data.
 
-As per the parameter estimates, the LASSO regression consists of eight variables as Cell Size has been dropped out. As shown in Figure 3.2, Cell Size is strongly positively correlated with Cell Shape, and hence, the model does not require both of the variables. The parameter estimates are positive for all predictor variables, showing that the probability of classifying the observation as malignant increases with higher values of the predictor variables.
+As per the parameter estimates, the LASSO regression consists of eight variables as Cell Size has been dropped out. As shown in correlation matrix, Cell Size is strongly positively correlated with Cell Shape, and hence, the model does not require both of the variables. The parameter estimates are positive for all predictor variables, showing that the probability of classifying the observation as malignant increases with higher values of the predictor variables.
 
 | |Variables|Estimate|
 |-|---------|--------|
 ||(Intercept)|- 1.26299|
-|x_1|Clump Thickness|1.03032|
-|x_2|Cell Size|0.00000|
-|x_3|Cell Shape|0.70962|
-|x_4|Marginal Adhesion|0.09953|
-|x_5|Single Epithelial Cell Size|0.54638|
-|x_6|Bare Nuclei|1.29513|
-|x_7|Bland Chromatin|0.79957|
-|x_8|Normal Nucleoli|0.51511|
-|x_9|Mitoses|0.15087|
+|x<sub>1</sub>|Clump Thickness|1.03032|
+|x<sub>2</sub>|Cell Size|0.00000|
+|x<sub>3</sub>|Cell Shape|0.70962|
+|x<sub>4</sub>|Marginal Adhesion|0.09953|
+|x<sub>5</sub>|Single Epithelial Cell Size|0.54638|
+|x<sub>6</sub>|Bare Nuclei|1.29513|
+|x<sub>7</sub>|Bland Chromatin|0.79957|
+|x<sub>8</sub>|Normal Nucleoli|0.51511|
+|x<sub>9</sub>|Mitoses|0.15087|
 
 The test error is 0.059, showing that the model is around 94% accurate in its prediction. From the confusion matrix, 4 benign cases were wrongly classified as malignant, and 8 malignant cases were wrongly classified as benign.
 || Predicted||
