@@ -133,11 +133,11 @@ The test error obtained is 0.074, and consequently, we can say that the model is
 
   
 ## Comparison of the classifiers
-From the results above, the classifier with better predictive performance is the Logistic Regression with Best Subset Selection (test error = 0.049),  followed by LASSO Regression (test error = 0.059) and then, Bayes classifier for LDA (test error = 0.074). However, the test results are based on a single train set and test set. For better comparison, we will apply a 10-fold cross validation to compute an average test error for each classifier, which will be used to compare the predictive performances. For the comparison to be fair, we will use the same 10 partitioning for the three methods, and the model M<sub>6</sub>, for Logistic Regression and Bayes Classifier for LDA.
+From the results above, the classifier with better predictive performance is the Logistic Regression with Best Subset Selection (test error = 0.049),  followed by LASSO Regression (test error = 0.059) and then, Bayes classifier for LDA (test error = 0.074). However, the test results are based on a single train set and test set. For better comparison, we will apply a 10-fold cross validation to compute an average test error for each classifier, which will be used to compare the predictive performances. For the comparison to be fair, we will use the same 10 partitioning for the three methods, the model M<sub>6</sub>, for Logistic Regression and Bayes Classifier for LDA, and M<sub>8</sub> for LASSO Regression.
 
 |Classifier|Test Error (MSE)|Accuracy (%)|
 |----------|----------------|------------|
-|Logistic| Regression|	0.0380|	96.2|
+|Logistic Regression|	0.0380|	96.2|
 |LASSO Regression|	0.0223	|97.8|
 |Bayes Classifier for LDA|	0.0395	|96.1|
 
